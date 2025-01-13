@@ -21,10 +21,14 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public string[] ticketCategory { get; set; }
         public string timestamp;
-        public string selectedFolderPath;
+        public string selectedFolderPath=string.Empty;
         private string selectedFileName = string.Empty;
+        public string ticketCategorySelected = string.Empty;
+        public string ticketNumebr = string.Empty;
+        public string fileNameBox = string.Empty;
+        public string fileNameCombined = string.Empty;
+        public string featureBranchName = string.Empty;
 
 
 
@@ -32,7 +36,7 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             //webBrowser1.DocumentCompleted += webBrowser1_DocumentCompleted;
-           //DisplayContent();
+            //DisplayContent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -49,6 +53,7 @@ namespace WindowsFormsApp1
             startInfo.UseShellExecute = false;
             startInfo.RedirectStandardOutput = true;
             startInfo.RedirectStandardError = true;
+            startInfo.CreateNoWindow = true;
             // Set the working directory to the desired repository path
             startInfo.WorkingDirectory = selectedFolderPath;
 
@@ -84,14 +89,16 @@ namespace WindowsFormsApp1
 
         }
 
-        private void GitAddBtn_Click(object sender, EventArgs e)
+        private void SwitchBranchBtn_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo("git", "add .");
+            featureBranchName = ticketCategorySelected + "-" + ticketNumebr + "-" + fileNameBox;
+            ProcessStartInfo startInfo = new ProcessStartInfo("git", $"checkout -b {featureBranchName}");
             startInfo.UseShellExecute = false;
             startInfo.RedirectStandardOutput = true;
             startInfo.RedirectStandardError = true;
-            // Set the working directory to the desired repository path
-            startInfo.WorkingDirectory = @"F:\git testing pr\testing_blaze_pr";
+            startInfo.CreateNoWindow = true;
+            // Set the working directory to the desired repository path \"{featureBranchName}\"
+            startInfo.WorkingDirectory = selectedFolderPath;
 
             // Create a new process and start it
             using (Process process = new Process { StartInfo = startInfo })
@@ -121,6 +128,8 @@ namespace WindowsFormsApp1
                 //{
                 //    MessageBox.Show($"Git Status Error:\n{error}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 //}
+
+                GetCurrentBranch();
 
                 process.WaitForExit();
             }
@@ -180,7 +189,7 @@ namespace WindowsFormsApp1
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-
+            ticketNumebr = textBox2.Text;  
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -194,30 +203,14 @@ namespace WindowsFormsApp1
                 {
                     webBrowser1.Url = new Uri(fbd.FileName);
                     selectedFolderPath = fbd.FileName;
-                    //GetCurrentBranch();
+                    GetCurrentBranch();
                     textBox5.Text = selectedFolderPath;
                     label7.Text = selectedFolderPath;
 
                 }
             
         }
-        void DisplayContent()
-        {
-            // Create simple HTML content
-            string htmlContent = @"
-        <html>
-            <head>
-                <title>Sample Content</title>
-            </head>
-            <body>
-                <h1>Welcome to the WebBrowser Control!</h1>
-                <p>This is some <b>sample content</b> displayed in the WebBrowser control.</p>
-            </body>
-        </html>";
-
-            // Set the HTML content to the WebBrowser control
-            webBrowser1.DocumentText = htmlContent;
-        }
+        
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
@@ -271,7 +264,7 @@ namespace WindowsFormsApp1
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-
+            fileNameBox = textBox3.Text;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -279,6 +272,35 @@ namespace WindowsFormsApp1
 
         }
 
-        
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ticketCategorySelected = comboBox1.SelectedItem.ToString();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            System.Windows.MessageBox.Show(ticketCategorySelected);
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            featureBranchName = ticketCategorySelected + "-" + ticketNumebr + "-" + fileNameBox;
+            fileNameCombined = timestamp + "__" + featureBranchName;
+            // Copy the file name to the clipboard
+            System.Windows.Clipboard.SetText(fileNameCombined);
+
+            // Optionally, show a message indicating the file name was copied
+            System.Windows.MessageBox.Show($"{fileNameCombined} has been copied to the clipboard.");
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
