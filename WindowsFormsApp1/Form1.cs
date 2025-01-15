@@ -29,6 +29,7 @@ namespace WindowsFormsApp1
         public string fileNameBox = string.Empty;
         public string fileNameCombined = string.Empty;
         public string featureBranchName = string.Empty;
+        public string commitMessage = string.Empty;
 
 
 
@@ -37,6 +38,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             //webBrowser1.DocumentCompleted += webBrowser1_DocumentCompleted;
             //DisplayContent();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -55,7 +57,7 @@ namespace WindowsFormsApp1
             startInfo.RedirectStandardError = true;
             startInfo.CreateNoWindow = true;
             // Set the working directory to the desired repository path
-            startInfo.WorkingDirectory = selectedFolderPath;
+            //startInfo.WorkingDirectory = selectedFolderPath;
 
             // Create a new process and start it
             using (Process process = new Process { StartInfo = startInfo })
@@ -262,6 +264,125 @@ namespace WindowsFormsApp1
             }
         }
 
+        protected void GitAddFunction()
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo("git", $"add .");
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardError = true;
+            startInfo.CreateNoWindow = true;
+            // Set the working directory to the desired repository path
+            startInfo.WorkingDirectory = selectedFolderPath;
+
+            // Create a new process and start it
+            using (Process process = new Process { StartInfo = startInfo })
+            {
+                process.Start();
+
+                // Read the output from the process
+                string output = process.StandardOutput.ReadToEnd();
+                string error = process.StandardError.ReadToEnd();
+
+                //// Display the output in the web browser control
+                //// Create a temporary HTML file
+                //string tempFilePath = Path.GetTempFileName() + ".html";
+
+                //// Create the HTML content
+                //string htmlContent = $"<pre>{output}</pre>";
+
+                //// Write the HTML content to the file
+                //File.WriteAllText(tempFilePath, htmlContent);
+
+                //// Navigate the WebBrowser to the temporary file
+                //LogBoxWindow.Navigate(new Uri(tempFilePath));
+
+                process.WaitForExit();
+
+            }
+        }
+
+        protected void CommitMessageFunction()
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo("git", $"commit -m {commitMessage}");
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardError = true;
+            startInfo.CreateNoWindow = true;
+            // Set the working directory to the desired repository path
+            startInfo.WorkingDirectory = selectedFolderPath;
+
+            // Create a new process and start it
+            using (Process process = new Process { StartInfo = startInfo })
+            {
+                process.Start();
+
+                // Read the output from the process
+                string output = process.StandardOutput.ReadToEnd();
+                string error = process.StandardError.ReadToEnd();
+
+                //// Display the output in the web browser control
+                //// Create a temporary HTML file
+                //string tempFilePath = Path.GetTempFileName() + ".html";
+
+                //// Create the HTML content
+                //string htmlContent = $"<pre>{output}</pre>";
+
+                //// Write the HTML content to the file
+                //File.WriteAllText(tempFilePath, htmlContent);
+
+                //// Navigate the WebBrowser to the temporary file
+                //LogBoxWindow.Navigate(new Uri(tempFilePath));
+
+                process.WaitForExit();
+
+            }
+        }
+
+        protected void GitPushFunction()
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo("git", $"commit -m {commitMessage}");
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardError = true;
+            startInfo.CreateNoWindow = true;
+            // Set the working directory to the desired repository path
+            startInfo.WorkingDirectory = selectedFolderPath;
+
+            if (commitMessage==string.Empty || commitMessage.Length < 8)
+            {
+                System.Windows.MessageBox.Show("Enter proper commit message");
+            }
+
+            // Create a new process and start it
+            else
+            {
+                using (Process process = new Process { StartInfo = startInfo })
+                {
+                    process.Start();
+
+                    // Read the output from the process
+                    string output = process.StandardOutput.ReadToEnd();
+                    string error = process.StandardError.ReadToEnd();
+
+                    //// Display the output in the web browser control
+                    //// Create a temporary HTML file
+                    //string tempFilePath = Path.GetTempFileName() + ".html";
+
+                    //// Create the HTML content
+                    //string htmlContent = $"<pre>{output}</pre>";
+
+                    //// Write the HTML content to the file
+                    //File.WriteAllText(tempFilePath, htmlContent);
+
+                    //// Navigate the WebBrowser to the temporary file
+                    //LogBoxWindow.Navigate(new Uri(tempFilePath));
+
+                    process.WaitForExit();
+
+                }
+            }
+        }
+
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             fileNameBox = textBox3.Text;
@@ -300,7 +421,12 @@ namespace WindowsFormsApp1
 
         private void button10_Click(object sender, EventArgs e)
         {
+            GitPushFunction();
+        }
 
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            commitMessage = textBox4.Text;    
         }
     }
 }
