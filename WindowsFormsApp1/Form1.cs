@@ -186,7 +186,7 @@ namespace WindowsFormsApp1
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            timestamp = textBox1.Text;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -386,16 +386,20 @@ namespace WindowsFormsApp1
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             fileNameBox = textBox3.Text;
+
+            if (fileNameBox.Contains(" "))
+            {
+                label11.Text = "Please remove whitespaces. You can add hypen or underscore instead.";
+            }
+            else
+            {
+                label11.Text = "";
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ticketCategorySelected = comboBox1.SelectedItem.ToString();
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -427,6 +431,16 @@ namespace WindowsFormsApp1
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
             commitMessage = textBox4.Text;    
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            ticketCategorySelected = textBox6.Text;
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
