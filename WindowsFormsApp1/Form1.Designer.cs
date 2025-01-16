@@ -304,6 +304,7 @@
             this.button9.TabIndex = 31;
             this.button9.Text = "Commit";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // label8
             // 
@@ -349,7 +350,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoScrollMargin = new System.Drawing.Size(0, 20);
-            this.ClientSize = new System.Drawing.Size(1029, 480);
+            this.ClientSize = new System.Drawing.Size(1046, 480);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.textBox6);

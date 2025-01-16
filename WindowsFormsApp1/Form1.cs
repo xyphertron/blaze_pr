@@ -36,8 +36,6 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
-            //webBrowser1.DocumentCompleted += webBrowser1_DocumentCompleted;
-            //DisplayContent();
             
         }
 
@@ -57,7 +55,7 @@ namespace WindowsFormsApp1
             startInfo.RedirectStandardError = true;
             startInfo.CreateNoWindow = true;
             // Set the working directory to the desired repository path
-            //startInfo.WorkingDirectory = selectedFolderPath;
+            startInfo.WorkingDirectory = selectedFolderPath;
 
             // Create a new process and start it
             using (Process process = new Process { StartInfo = startInfo })
@@ -259,6 +257,7 @@ namespace WindowsFormsApp1
                 string error = process.StandardError.ReadToEnd();
 
                 label8.Text = output;
+                featureBranchName = output;
 
                 process.WaitForExit();
             }
@@ -266,7 +265,7 @@ namespace WindowsFormsApp1
 
         protected void GitAddFunction()
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo("git", $"add .");
+            ProcessStartInfo startInfo = new ProcessStartInfo("git", "add .");
             startInfo.UseShellExecute = false;
             startInfo.RedirectStandardOutput = true;
             startInfo.RedirectStandardError = true;
@@ -279,9 +278,9 @@ namespace WindowsFormsApp1
             {
                 process.Start();
 
-                // Read the output from the process
-                string output = process.StandardOutput.ReadToEnd();
-                string error = process.StandardError.ReadToEnd();
+                //// Read the output from the process
+                //string output = process.StandardOutput.ReadToEnd();
+                //string error = process.StandardError.ReadToEnd();
 
                 //// Display the output in the web browser control
                 //// Create a temporary HTML file
@@ -295,6 +294,8 @@ namespace WindowsFormsApp1
 
                 //// Navigate the WebBrowser to the temporary file
                 //LogBoxWindow.Navigate(new Uri(tempFilePath));
+
+                System.Windows.MessageBox.Show("add zala");
 
                 process.WaitForExit();
 
@@ -303,7 +304,7 @@ namespace WindowsFormsApp1
 
         protected void CommitMessageFunction()
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo("git", $"commit -m {commitMessage}");
+            ProcessStartInfo startInfo = new ProcessStartInfo("git", $"commit -m \"{commitMessage}\"");
             startInfo.UseShellExecute = false;
             startInfo.RedirectStandardOutput = true;
             startInfo.RedirectStandardError = true;
@@ -316,9 +317,9 @@ namespace WindowsFormsApp1
             {
                 process.Start();
 
-                // Read the output from the process
-                string output = process.StandardOutput.ReadToEnd();
-                string error = process.StandardError.ReadToEnd();
+                //// Read the output from the process
+                //string output = process.StandardOutput.ReadToEnd();
+                //string error = process.StandardError.ReadToEnd();
 
                 //// Display the output in the web browser control
                 //// Create a temporary HTML file
@@ -333,6 +334,8 @@ namespace WindowsFormsApp1
                 //// Navigate the WebBrowser to the temporary file
                 //LogBoxWindow.Navigate(new Uri(tempFilePath));
 
+                System.Windows.MessageBox.Show("commit zala");
+
                 process.WaitForExit();
 
             }
@@ -340,14 +343,7 @@ namespace WindowsFormsApp1
 
         protected void GitPushFunction()
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo("git", $"commit -m {commitMessage}");
-            startInfo.UseShellExecute = false;
-            startInfo.RedirectStandardOutput = true;
-            startInfo.RedirectStandardError = true;
-            startInfo.CreateNoWindow = true;
-            // Set the working directory to the desired repository path
-            startInfo.WorkingDirectory = selectedFolderPath;
-
+            
             if (commitMessage==string.Empty || commitMessage.Length < 8)
             {
                 System.Windows.MessageBox.Show("Enter proper commit message");
@@ -356,6 +352,14 @@ namespace WindowsFormsApp1
             // Create a new process and start it
             else
             {
+                ProcessStartInfo startInfo = new ProcessStartInfo("git", $"push origin {featureBranchName}");
+                startInfo.UseShellExecute = false;
+                startInfo.RedirectStandardOutput = true;
+                startInfo.RedirectStandardError = true;
+                startInfo.CreateNoWindow = true;
+                // Set the working directory to the desired repository path
+                startInfo.WorkingDirectory = selectedFolderPath;
+
                 using (Process process = new Process { StartInfo = startInfo })
                 {
                     process.Start();
@@ -364,18 +368,20 @@ namespace WindowsFormsApp1
                     string output = process.StandardOutput.ReadToEnd();
                     string error = process.StandardError.ReadToEnd();
 
-                    //// Display the output in the web browser control
-                    //// Create a temporary HTML file
-                    //string tempFilePath = Path.GetTempFileName() + ".html";
+                    // Display the output in the web browser control
+                    // Create a temporary HTML file
+                    string tempFilePath = Path.GetTempFileName() + ".html";
 
-                    //// Create the HTML content
-                    //string htmlContent = $"<pre>{output}</pre>";
+                    // Create the HTML content
+                    string htmlContent = $"<pre>{error}</pre>";
 
-                    //// Write the HTML content to the file
-                    //File.WriteAllText(tempFilePath, htmlContent);
+                    // Write the HTML content to the file
+                    File.WriteAllText(tempFilePath, htmlContent);
 
-                    //// Navigate the WebBrowser to the temporary file
-                    //LogBoxWindow.Navigate(new Uri(tempFilePath));
+                    // Navigate the WebBrowser to the temporary file
+                    LogBoxWindow.Navigate(new Uri(tempFilePath));
+
+                    System.Windows.MessageBox.Show("push zala");
 
                     process.WaitForExit();
 
@@ -425,6 +431,8 @@ namespace WindowsFormsApp1
 
         private void button10_Click(object sender, EventArgs e)
         {
+            GitAddFunction();
+            CommitMessageFunction();
             GitPushFunction();
         }
 
@@ -441,6 +449,11 @@ namespace WindowsFormsApp1
         private void label11_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //GitAddFunction();
         }
     }
 }

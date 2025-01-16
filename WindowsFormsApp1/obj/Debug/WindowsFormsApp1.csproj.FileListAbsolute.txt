@@ -1,8 +1,6 @@
 C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
 C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
 C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
-C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.WindowsAPICodePack.dll
-C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
 C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.WindowsAPICodePack.xml
 C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
 C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
@@ -28,3 +26,9 @@ C:\Users\sarvesh.lanjewar\Desktop\User\blaze_pr\WindowsFormsApp1\obj\Debug\Windo
 C:\Users\sarvesh.lanjewar\Desktop\User\blaze_pr\WindowsFormsApp1\obj\Debug\WindowsF.A1EEDF9B.Up2Date
 C:\Users\sarvesh.lanjewar\Desktop\User\blaze_pr\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\sarvesh.lanjewar\Desktop\User\blaze_pr\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.manifest
+C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.application
+C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe.manifest
+C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.application
+C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.Fody.CopyLocal.cache
+C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.Fody.RuntimeCopyLocal.cache
