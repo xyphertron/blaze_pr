@@ -364,18 +364,18 @@ namespace WindowsFormsApp1
                     string output = process.StandardOutput.ReadToEnd();
                     string error = process.StandardError.ReadToEnd();
 
-                    //// Display the output in the web browser control
-                    //// Create a temporary HTML file
-                    //string tempFilePath = Path.GetTempFileName() + ".html";
+                    // Display the output in the web browser control
+                    // Create a temporary HTML file
+                    string tempFilePath = Path.GetTempFileName() + ".html";
 
-                    //// Create the HTML content
-                    //string htmlContent = $"<pre>{output}</pre>";
+                    // Create the HTML content
+                    string htmlContent = $"<pre>{output}</pre>";
 
-                    //// Write the HTML content to the file
-                    //File.WriteAllText(tempFilePath, htmlContent);
+                    // Write the HTML content to the file
+                    File.WriteAllText(tempFilePath, htmlContent);
 
-                    //// Navigate the WebBrowser to the temporary file
-                    //LogBoxWindow.Navigate(new Uri(tempFilePath));
+                    // Navigate the WebBrowser to the temporary file
+                    LogBoxWindow.Navigate(new Uri(tempFilePath));
 
                     process.WaitForExit();
 
