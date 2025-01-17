@@ -257,7 +257,7 @@ namespace WindowsFormsApp1
                 string error = process.StandardError.ReadToEnd();
 
                 label8.Text = output;
-                featureBranchName = output;
+                featureBranchName = output.Trim();
 
                 process.WaitForExit();
             }
@@ -278,22 +278,22 @@ namespace WindowsFormsApp1
             {
                 process.Start();
 
-                //// Read the output from the process
-                //string output = process.StandardOutput.ReadToEnd();
-                //string error = process.StandardError.ReadToEnd();
+                // Read the output from the process
+                string output = process.StandardOutput.ReadToEnd();
+                string error = process.StandardError.ReadToEnd();
 
-                //// Display the output in the web browser control
-                //// Create a temporary HTML file
-                //string tempFilePath = Path.GetTempFileName() + ".html";
+                // Display the output in the web browser control
+                // Create a temporary HTML file
+                string tempFilePath = Path.GetTempFileName() + ".html";
 
-                //// Create the HTML content
-                //string htmlContent = $"<pre>{output}</pre>";
+                // Create the HTML content
+                string htmlContent = $"<pre>{output+error}</pre>";
 
-                //// Write the HTML content to the file
-                //File.WriteAllText(tempFilePath, htmlContent);
+                // Write the HTML content to the file
+                File.WriteAllText(tempFilePath, htmlContent);
 
-                //// Navigate the WebBrowser to the temporary file
-                //LogBoxWindow.Navigate(new Uri(tempFilePath));
+                // Navigate the WebBrowser to the temporary file
+                LogBoxWindow.Navigate(new Uri(tempFilePath));
 
                 System.Windows.MessageBox.Show("add zala");
 
@@ -317,22 +317,22 @@ namespace WindowsFormsApp1
             {
                 process.Start();
 
-                //// Read the output from the process
-                //string output = process.StandardOutput.ReadToEnd();
-                //string error = process.StandardError.ReadToEnd();
+                // Read the output from the process
+                string output = process.StandardOutput.ReadToEnd();
+                string error = process.StandardError.ReadToEnd();
 
-                //// Display the output in the web browser control
-                //// Create a temporary HTML file
-                //string tempFilePath = Path.GetTempFileName() + ".html";
+                // Display the output in the web browser control
+                // Create a temporary HTML file
+                string tempFilePath = Path.GetTempFileName() + ".html";
 
-                //// Create the HTML content
-                //string htmlContent = $"<pre>{output}</pre>";
+                // Create the HTML content
+                string htmlContent = $"<pre>{output+error}</pre>";
 
-                //// Write the HTML content to the file
-                //File.WriteAllText(tempFilePath, htmlContent);
+                // Write the HTML content to the file
+                File.WriteAllText(tempFilePath, htmlContent);
 
-                //// Navigate the WebBrowser to the temporary file
-                //LogBoxWindow.Navigate(new Uri(tempFilePath));
+                // Navigate the WebBrowser to the temporary file
+                LogBoxWindow.Navigate(new Uri(tempFilePath));
 
                 System.Windows.MessageBox.Show("commit zala");
 
@@ -373,7 +373,7 @@ namespace WindowsFormsApp1
                     string tempFilePath = Path.GetTempFileName() + ".html";
 
                     // Create the HTML content
-                    string htmlContent = $"<pre>{error}</pre>";
+                    string htmlContent = $"<pre>{output+error}</pre>";
 
                     // Write the HTML content to the file
                     File.WriteAllText(tempFilePath, htmlContent);
