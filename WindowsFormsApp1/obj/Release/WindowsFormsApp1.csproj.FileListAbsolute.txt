@@ -15,8 +15,5 @@ C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Release\WindowsFormsAp
 C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Release\WindowsFormsApp1.application
 C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\obj\Release\WindowsFormsApp1.exe.manifest
 C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\obj\Release\WindowsFormsApp1.application
-C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Release\Costura.dll
-C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Release\Microsoft.WindowsAPICodePack.dll
-C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Release\Microsoft.WindowsAPICodePack.Shell.dll
-C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Release\Costura.pdb
-C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\bin\Release\Costura.xml
+C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\obj\Release\WindowsFormsApp1.csproj.Fody.CopyLocal.cache
+C:\Project Dev\.NET\WindowsFormsApp1\WindowsFormsApp1\obj\Release\WindowsFormsApp1.csproj.Fody.RuntimeCopyLocal.cache

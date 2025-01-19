@@ -295,7 +295,7 @@ namespace WindowsFormsApp1
                 // Navigate the WebBrowser to the temporary file
                 LogBoxWindow.Navigate(new Uri(tempFilePath));
 
-                System.Windows.MessageBox.Show("add zala");
+                //System.Windows.MessageBox.Show("add zala");
 
                 process.WaitForExit();
 
@@ -334,11 +334,50 @@ namespace WindowsFormsApp1
                 // Navigate the WebBrowser to the temporary file
                 LogBoxWindow.Navigate(new Uri(tempFilePath));
 
-                System.Windows.MessageBox.Show("commit zala");
+                //System.Windows.MessageBox.Show("commit zala");
 
                 process.WaitForExit();
 
             }
+        }
+
+        protected void GitPullFunction()
+        {
+
+            
+                ProcessStartInfo startInfo = new ProcessStartInfo("git", "pull origin master");
+                startInfo.UseShellExecute = false;
+                startInfo.RedirectStandardOutput = true;
+                startInfo.RedirectStandardError = true;
+                startInfo.CreateNoWindow = true;
+                // Set the working directory to the desired repository path
+                startInfo.WorkingDirectory = selectedFolderPath;
+
+                using (Process process = new Process { StartInfo = startInfo })
+                {
+                    process.Start();
+
+                    // Read the output from the process
+                    string output = process.StandardOutput.ReadToEnd();
+                    string error = process.StandardError.ReadToEnd();
+
+                    // Display the output in the web browser control
+                    // Create a temporary HTML file
+                    string tempFilePath = Path.GetTempFileName() + ".html";
+
+                    // Create the HTML content
+                    string htmlContent = $"<pre>{output + error}</pre>";
+
+                    // Write the HTML content to the file
+                    File.WriteAllText(tempFilePath, htmlContent);
+
+                    // Navigate the WebBrowser to the temporary file
+                    LogBoxWindow.Navigate(new Uri(tempFilePath));
+
+                    process.WaitForExit();
+
+                }
+            
         }
 
         protected void GitPushFunction()
@@ -347,6 +386,10 @@ namespace WindowsFormsApp1
             if (commitMessage==string.Empty || commitMessage.Length < 8)
             {
                 System.Windows.MessageBox.Show("Enter proper commit message");
+            }
+            else if(featureBranchName == "master")
+            {
+                System.Windows.MessageBox.Show("Can't push directly on master");
             }
 
             // Create a new process and start it
@@ -381,12 +424,62 @@ namespace WindowsFormsApp1
                     // Navigate the WebBrowser to the temporary file
                     LogBoxWindow.Navigate(new Uri(tempFilePath));
 
-                    System.Windows.MessageBox.Show("push zala");
+                    //System.Windows.MessageBox.Show("push zala");
 
                     process.WaitForExit();
 
                 }
             }
+        }
+
+        protected void GitCheckoutMasterFunction()
+        {
+
+             ProcessStartInfo startInfo = new ProcessStartInfo("git", $"checkout master");
+                startInfo.UseShellExecute = false;
+                startInfo.RedirectStandardOutput = true;
+                startInfo.RedirectStandardError = true;
+                startInfo.CreateNoWindow = true;
+                // Set the working directory to the desired repository path
+                startInfo.WorkingDirectory = selectedFolderPath;
+
+                using (Process process = new Process { StartInfo = startInfo })
+                {
+                    process.Start();
+
+                    // Read the output from the process
+                    //string output = process.StandardOutput.ReadToEnd();
+                    //string error = process.StandardError.ReadToEnd();
+
+                    process.WaitForExit();
+
+                }
+            
+        }
+
+        protected void GitDeleteLocalBranchFunction()
+        {
+
+            ProcessStartInfo startInfo = new ProcessStartInfo("git", $"branch -D {featureBranchName}");
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardError = true;
+            startInfo.CreateNoWindow = true;
+            // Set the working directory to the desired repository path
+            startInfo.WorkingDirectory = selectedFolderPath;
+
+            using (Process process = new Process { StartInfo = startInfo })
+            {
+                process.Start();
+
+                // Read the output from the process
+                string output = process.StandardOutput.ReadToEnd();
+                string error = process.StandardError.ReadToEnd();
+
+                process.WaitForExit();
+
+            }
+
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -431,9 +524,15 @@ namespace WindowsFormsApp1
 
         private void button10_Click(object sender, EventArgs e)
         {
+            GitPullFunction();
             GitAddFunction();
             CommitMessageFunction();
             GitPushFunction();
+            GitCheckoutMasterFunction();  
+            GitDeleteLocalBranchFunction();
+            GetCurrentBranch();
+            textBox4.Text = string.Empty;
+
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
